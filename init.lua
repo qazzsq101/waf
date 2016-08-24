@@ -137,12 +137,12 @@ function DenyUa()
 				if rule ~="" and ngxmatch(ua,rule,"isjo") then
 					Log('UA',ngx.var.request_uri,"-",rule)
 					Say_html()
-				return true
+					return true
+				end
 			end
 		end
-end
 	end
-    return false
+    	return false
 end
 
 function DenyCookie()
