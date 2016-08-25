@@ -188,11 +188,13 @@ function DenyPost()
 	if all_switch and ngx.var.request_method == "POST" then
 		ngx.req.read_body()
 		local rule
-		for _,rule in pairs(postrules) do
-			if rule ~="" and ngxmatch(ngx.req.get_body_data(),rule,"isjo") then
-				Log('POST',ngx.var.request_uri,"-",rule)
-				Say_html()
-				return true
+		if ngx.req.get_body_data() ~= "" and ngx.req.get_body_data() ~= nil then
+			for _,rule in pairs(postrules) do
+				if rule ~="" and ngxmatch(ngx.req.get_body_data(),rule,"isjo") then
+					Log('POST',ngx.var.request_uri,"-",rule)
+					Say_html()
+					return true
+				end
 			end
 		end
 	end
